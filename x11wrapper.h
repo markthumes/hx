@@ -2,6 +2,7 @@
 #include <X11/extensions/Xdbe.h>
 #include <inttypes.h>
 #include <limits.h>
+#include <unistd.h>
 
 
 
@@ -49,7 +50,7 @@ public:
 	void drawLine  ( Color c, Line   l,                int width = 1 );
 	void drawPoints( Color c, Point* p, int count = 1, int size  = 1 );
 	void drawPoint ( Color c, Point  p,                int size  = 1 );
-	void refresh();
+	void refresh( float timeSeconds = 0.0 );
 
 	void setWindowName( const char* name );
 	void setBackground( Color c );
@@ -65,7 +66,7 @@ public:
 protected:
 	void drawToBuffer();
 	void readFromBuffer();
-private:
+//private:
 	uint8_t m_bufferCounter;
 	const char*    m_windowName;
 	bool m_open;
