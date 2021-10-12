@@ -52,11 +52,11 @@ X11::Color::Color(const X11::Color &c){
 }
 
 X11::X11( const char* name, int w, int h):m_windowName(name){
-	m_display = XOpenDisplay(NULL);
 	m_attrib.width  = w;
 	m_attrib.height = h;
 }
 void X11::open(){
+	m_display = XOpenDisplay(NULL);
 	XSetWindowAttributes swa;
 	swa.event_mask = ExposureMask | KeyPressMask;
 	Window root = DefaultRootWindow(m_display);
@@ -142,7 +142,8 @@ void X11::drawPoints( Color c, X11::Point* p, int count, int size ){
 	XFreeGC( m_display, gc );
 }
 
-void X11::refresh(){
+void X11::refresh( float timeSeconds ){
+	usleep( timeSeconds * 1000 * 1000 );
 	if( m_doubleBuffered ){
 		swapBuffers();
 	}
