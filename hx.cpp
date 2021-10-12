@@ -72,8 +72,9 @@ void X11::open(){
 void X11::close(){
 	if(m_open){
 		m_open = false;
-		if( m_doubleBuffered 
+		if( m_doubleBuffered ){
 			XdbeDeallocateBackBufferName( m_display, m_backBuffer );
+		}
 		XDestroyWindow( m_display, m_window );
 		XCloseDisplay( m_display );
 	}
@@ -161,12 +162,6 @@ void X11::setDoubleBuffered( bool mode ){
 	m_doubleBuffered = true;
 	int maj, min;
 	XdbeQueryExtension( m_display, &maj, &min );
-	int screens = 0;
-	XdbeScreenVisualInfo *i;
-		i = XdbeGetVisualInfo( m_display, NULL, &screens );
-		if( i == NULL ) fprintf(stdout, "Failure\n");
-		fflush(stdout);
-	fprintf(stdout, "Visuals: %d, %d\n", i->count, screens);
-	XdbeFreeVisualInfo( i );
 	m_backBuffer = XdbeAllocateBackBufferName( m_display, m_window, XdbeUndefined );
 }
+
