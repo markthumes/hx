@@ -1,4 +1,4 @@
-#include "hx.h"
+#include "x11wrapper.h"
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
